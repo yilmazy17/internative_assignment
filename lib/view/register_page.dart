@@ -232,7 +232,7 @@ class _RegisPageState extends State<RegisPage> {
                                       } else {
                                         Get.put(BlogController());
                                         EasyLoading.showSuccess(
-                                            'Kayıt Başarılı',
+                                            'Kayıt Başarılıs',
                                             duration: Duration(seconds: 2),
                                             dismissOnTap: true);
                                         var catResult = await getCategories();
