@@ -9,6 +9,7 @@ import 'package:internative_assignment/controller/user_controller.dart';
 import 'package:internative_assignment/model/dataaccess/get_blogs.dart';
 
 import 'package:flutter_html/flutter_html.dart';
+import 'package:internative_assignment/view/home_page.dart';
 
 class BlogDetailPage extends StatefulWidget {
   BlogDetailPage({Key? key}) : super(key: key);
@@ -67,7 +68,9 @@ class _BlogDetailPageState extends State<BlogDetailPage> {
         leading: IconButton(
           color: Colors.black,
           icon: Icon(Icons.arrow_back_ios),
-          onPressed: () => Get.back(),
+          onPressed: () {
+            Get.back();
+          },
         ),
         automaticallyImplyLeading: false,
         centerTitle: true,

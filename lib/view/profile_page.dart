@@ -105,7 +105,13 @@ class _ProfilePageState extends State<ProfilePage> {
         leading: IconButton(
           color: Colors.black,
           icon: Icon(Icons.arrow_back_ios),
-          onPressed: () => Get.back(),
+          onPressed: () async {
+            EasyLoading.show(status: 'Bloglar Yükleniyor');
+            widget._blogController.blogs.clear();
+            await getBlogs(null, 'all');
+            EasyLoading.dismiss();
+            Get.toNamed('/homepage');
+          },
         ),
         automaticallyImplyLeading: false,
         centerTitle: true,
@@ -216,9 +222,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
                                                                   EasyLoading
                                                                       .dismiss();
-                                                                  filePath = photo!
-                                                                      .path
-                                                                      .toString();
+
                                                                   setState(
                                                                       () {});
                                                                   function();

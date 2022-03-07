@@ -65,7 +65,13 @@ class _FavoritesPageState extends State<FavoritesPage> {
         leading: IconButton(
           color: Colors.black,
           icon: Icon(Icons.arrow_back_ios),
-          onPressed: () => Get.back(),
+          onPressed: () async {
+            EasyLoading.show(status: 'Bloglar Yükleniyor');
+            widget._blogController.blogs.clear();
+            await getBlogs(null, 'all');
+            EasyLoading.dismiss();
+            Get.toNamed('/homepage');
+          },
         ),
         automaticallyImplyLeading: false,
         centerTitle: true,
@@ -101,7 +107,13 @@ class _FavoritesPageState extends State<FavoritesPage> {
                                       children: [
                                         Expanded(
                                           child: InkWell(
-                                            onTap: () {},
+                                            onTap: () {
+                                              widget._blogController
+                                                      .blogDetail =
+                                                  widget._blogController
+                                                      .blogs[(index * 2)];
+                                              Get.toNamed('/blogdetailpage');
+                                            },
                                             child: Container(
                                               decoration: BoxDecoration(
                                                 image: DecorationImage(
@@ -185,7 +197,13 @@ class _FavoritesPageState extends State<FavoritesPage> {
                                         ),
                                         Expanded(
                                           child: InkWell(
-                                            onTap: () {},
+                                            onTap: () {
+                                              widget._blogController
+                                                      .blogDetail =
+                                                  widget._blogController
+                                                      .blogs[(index * 2) + 1];
+                                              Get.toNamed('/blogdetailpage');
+                                            },
                                             child: Container(
                                               decoration: BoxDecoration(
                                                 image: DecorationImage(
@@ -279,7 +297,13 @@ class _FavoritesPageState extends State<FavoritesPage> {
                                         children: [
                                           Expanded(
                                             child: InkWell(
-                                              onTap: () {},
+                                              onTap: () {
+                                                widget._blogController
+                                                        .blogDetail =
+                                                    widget._blogController
+                                                        .blogs[(index * 2)];
+                                                Get.toNamed('/blogdetailpage');
+                                              },
                                               child: Container(
                                                 decoration: BoxDecoration(
                                                   image: DecorationImage(
@@ -365,7 +389,13 @@ class _FavoritesPageState extends State<FavoritesPage> {
                                           ),
                                           Expanded(
                                             child: InkWell(
-                                              onTap: () {},
+                                              onTap: () {
+                                                widget._blogController
+                                                        .blogDetail =
+                                                    widget._blogController
+                                                        .blogs[(index * 2) + 1];
+                                                Get.toNamed('/blogdetailpage');
+                                              },
                                               child: Container(
                                                 decoration: BoxDecoration(
                                                   image: DecorationImage(
@@ -457,7 +487,13 @@ class _FavoritesPageState extends State<FavoritesPage> {
                                         children: [
                                           Expanded(
                                             child: InkWell(
-                                              onTap: () {},
+                                              onTap: () {
+                                                widget._blogController
+                                                        .blogDetail =
+                                                    widget._blogController
+                                                        .blogs[(index * 2)];
+                                                Get.toNamed('/blogdetailpage');
+                                              },
                                               child: Container(
                                                 decoration: BoxDecoration(
                                                     image: DecorationImage(

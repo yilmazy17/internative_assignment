@@ -90,7 +90,7 @@ class _HomePageState extends State<HomePage> {
             children: [
               Container(
                 margin: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-                height: Get.height * 0.15,
+                height: Get.height * 0.20,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (BuildContext context, index) {
@@ -107,7 +107,7 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           Container(
                             decoration: BoxDecoration(),
-                            height: 91,
+                            height: Get.height * 0.15,
                             width: 164,
                             margin: EdgeInsets.fromLTRB(0, 0, 10, 0),
                             child: ClipRRect(
