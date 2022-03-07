@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:internative_assignment/view/blog_detail_page.dart';
 import 'package:internative_assignment/view/favorites_page.dart';
 import 'package:internative_assignment/view/home_page.dart';
 import 'package:internative_assignment/view/login_page.dart';
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
         GetPage(name: '/homepage', page: () => HomePage()),
         GetPage(name: '/favoritepage', page: () => FavoritesPage()),
         GetPage(name: '/profilepage', page: () => ProfilePage()),
+        GetPage(name: '/blogdetailpage', page: () => BlogDetailPage()),
       ],
     );
   }

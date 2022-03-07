@@ -162,7 +162,13 @@ class _HomePageState extends State<HomePage> {
                                       children: [
                                         Expanded(
                                           child: InkWell(
-                                            onTap: () {},
+                                            onTap: () {
+                                              widget._blogController
+                                                      .blogDetail =
+                                                  widget._blogController
+                                                      .blogs[(index * 2)];
+                                              Get.toNamed('/blogdetailpage');
+                                            },
                                             child: Container(
                                               decoration: BoxDecoration(
                                                 image: DecorationImage(
@@ -241,7 +247,13 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                         Expanded(
                                           child: InkWell(
-                                            onTap: () {},
+                                            onTap: () {
+                                              widget._blogController
+                                                      .blogDetail =
+                                                  widget._blogController
+                                                      .blogs[(index * 2) + 1];
+                                              Get.toNamed('/blogdetailpage');
+                                            },
                                             child: Container(
                                               decoration: BoxDecoration(
                                                 image: DecorationImage(
@@ -330,7 +342,13 @@ class _HomePageState extends State<HomePage> {
                                         children: [
                                           Expanded(
                                             child: InkWell(
-                                              onTap: () {},
+                                              onTap: () {
+                                                widget._blogController
+                                                        .blogDetail =
+                                                    widget._blogController
+                                                        .blogs[(index * 2)];
+                                                Get.toNamed('/blogdetailpage');
+                                              },
                                               child: Container(
                                                 decoration: BoxDecoration(
                                                   image: DecorationImage(
@@ -413,7 +431,13 @@ class _HomePageState extends State<HomePage> {
                                           ),
                                           Expanded(
                                             child: InkWell(
-                                              onTap: () {},
+                                              onTap: () {
+                                                widget._blogController
+                                                        .blogDetail =
+                                                    widget._blogController
+                                                        .blogs[(index * 2) + 1];
+                                                Get.toNamed('/blogdetailpage');
+                                              },
                                               child: Container(
                                                 decoration: BoxDecoration(
                                                   image: DecorationImage(
@@ -502,7 +526,13 @@ class _HomePageState extends State<HomePage> {
                                         children: [
                                           Expanded(
                                             child: InkWell(
-                                              onTap: () {},
+                                              onTap: () {
+                                                widget._blogController
+                                                        .blogDetail =
+                                                    widget._blogController
+                                                        .blogs[(index * 2)];
+                                                Get.toNamed('/blogdetailpage');
+                                              },
                                               child: Container(
                                                 decoration: BoxDecoration(
                                                     image: DecorationImage(

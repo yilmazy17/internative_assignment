@@ -62,6 +62,11 @@ class _FavoritesPageState extends State<FavoritesPage> {
         ],
       )),
       appBar: AppBar(
+        leading: IconButton(
+          color: Colors.black,
+          icon: Icon(Icons.arrow_back_ios),
+          onPressed: () => Get.back(),
+        ),
         automaticallyImplyLeading: false,
         centerTitle: true,
         title: FittedBox(

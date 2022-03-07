@@ -52,6 +52,7 @@ Future<Map<String, dynamic>?> getLocation(
       response = await http.get(url, headers: headers);
       resBody = json.decode(response.body);
       if (resBody['HasError'] == false) {
+        _userController.addImage(resBody['Data']['Image']);
         _userController.addLocation(resBody['Data']['Location']);
         return {'status': true, 'Error': 'NoError'};
       } else {

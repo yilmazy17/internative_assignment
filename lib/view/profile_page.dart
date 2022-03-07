@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,9 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:internative_assignment/model/dataaccess/getLocation.dart';
 import 'package:internative_assignment/model/dataaccess/get_blogs.dart';
 import 'package:internative_assignment/model/dataaccess/logout.dart';
+import 'package:internative_assignment/model/dataaccess/uploadImage.dart';
 import 'package:internative_assignment/view/materials/buttons.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ProfilePage extends StatefulWidget {
   ProfilePage({Key? key}) : super(key: key);
@@ -23,8 +26,12 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  final ImagePicker _picker = ImagePicker();
+  String? filePath;
   LatLng? _currentPostion;
   void _getUserLocation() async {
+    LocationPermission permission;
+    permission = await Geolocator.requestPermission();
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.low);
 
@@ -41,6 +48,10 @@ class _ProfilePageState extends State<ProfilePage> {
   void initState() {
     _getUserLocation();
     super.initState();
+  }
+
+  void function() {
+    setState(() {});
   }
 
   @override
@@ -91,6 +102,11 @@ class _ProfilePageState extends State<ProfilePage> {
         ],
       )),
       appBar: AppBar(
+        leading: IconButton(
+          color: Colors.black,
+          icon: Icon(Icons.arrow_back_ios),
+          onPressed: () => Get.back(),
+        ),
         automaticallyImplyLeading: false,
         centerTitle: true,
         title: FittedBox(
@@ -120,29 +136,160 @@ class _ProfilePageState extends State<ProfilePage> {
                     child: Column(
                       children: [
                         Container(
-                          child: Container(
-                            height: 174,
-                            width: 174,
-                            decoration: BoxDecoration(
+                          child: InkWell(
+                            onTap: () async {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) => AlertDialog(
+                                  alignment: Alignment.bottomCenter,
+                                  title: null,
+                                  content: StatefulBuilder(
+                                      builder: ((context, setState) =>
+                                          Container(
+                                              height: Get.height * 0.5,
+                                              width: Get.width,
+                                              child: Column(
+                                                children: [
+                                                  Container(
+                                                    decoration: BoxDecoration(
+                                                      color:
+                                                          (widget._userController
+                                                                      .image ==
+                                                                  null)
+                                                              ? (Colors.grey)
+                                                              : (null),
+                                                      image: (filePath == null)
+                                                          ? (widget._userController
+                                                                      .image ==
+                                                                  null)
+                                                              ? (null)
+                                                              : (DecorationImage(
+                                                                  fit: BoxFit
+                                                                      .fill,
+                                                                  image:
+                                                                      NetworkImage(
+                                                                    widget
+                                                                        ._userController
+                                                                        .image
+                                                                        .toString(),
+                                                                  ),
+                                                                ))
+                                                          : DecorationImage(
+                                                              fit: BoxFit.fill,
+                                                              image: FileImage(
+                                                                File(filePath
+                                                                    .toString()),
+                                                              ),
+                                                            ),
+                                                    ),
+                                                    height: Get.height * 0.4,
+                                                  ),
+                                                  Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.min,
+                                                    children: [
+                                                      Flexible(
+                                                        child:
+                                                            LoginRegisterButton(
+                                                                background_color:
+                                                                    Colors
+                                                                        .black,
+                                                                text_color:
+                                                                    Colors
+                                                                        .white,
+                                                                icon: Icon(
+                                                                  Icons.logout,
+                                                                  color: Colors
+                                                                      .white,
+                                                                ),
+                                                                textValue:
+                                                                    'Select',
+                                                                method:
+                                                                    () async {
+                                                                  EasyLoading.show(
+                                                                      status:
+                                                                          'Fotoğraf Yükleniyor');
+                                                                  XFile? photo =
+                                                                      await _picker.pickImage(
+                                                                          source:
+                                                                              ImageSource.gallery);
+
+                                                                  EasyLoading
+                                                                      .dismiss();
+                                                                  filePath = photo!
+                                                                      .path
+                                                                      .toString();
+                                                                  setState(
+                                                                      () {});
+                                                                  function();
+                                                                }),
+                                                      ),
+                                                      Flexible(
+                                                        child:
+                                                            LoginRegisterButton(
+                                                                text_color:
+                                                                    Colors
+                                                                        .black,
+                                                                icon: Icon(
+                                                                  Icons.logout,
+                                                                  color: Colors
+                                                                      .black,
+                                                                ),
+                                                                textValue:
+                                                                    'Remove',
+                                                                method:
+                                                                    () async {
+                                                                  await getLocation(
+                                                                      widget._userController
+                                                                              .location![
+                                                                          'Longtitude'],
+                                                                      widget
+                                                                          ._userController
+                                                                          .location!['Longtitude']);
+                                                                  filePath =
+                                                                      null;
+                                                                  setState(
+                                                                      () {});
+                                                                  function();
+                                                                }),
+                                                      ),
+                                                    ],
+                                                  )
+                                                ],
+                                              )))),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              height: 174,
+                              width: 174,
+                              decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(100),
                                 color: (widget._userController.image == null)
                                     ? (Colors.grey)
                                     : (null),
-                                image: (widget._userController.image == null)
-                                    ? (null)
+                                image: (filePath == null)
+                                    ? (widget._userController.image == null)
+                                        ? (null)
+                                        : (DecorationImage(
+                                            fit: BoxFit.fill,
+                                            image: NetworkImage(
+                                              widget._userController.image
+                                                  .toString(),
+                                            ),
+                                          ))
                                     : DecorationImage(
-                                        image: NetworkImage(
-                                          widget._userController.image
-                                              .toString(),
+                                        fit: BoxFit.fill,
+                                        image: FileImage(
+                                          File(filePath.toString()),
                                         ),
-                                      )),
-                            child: Align(
-                              alignment: Alignment.bottomRight,
-                              child: Container(
-                                margin: EdgeInsets.fromLTRB(0, 0, 20, 20),
-                                child: IconButton(
-                                  onPressed: () {},
-                                  icon: Icon(
+                                      ),
+                              ),
+                              child: Align(
+                                alignment: Alignment.bottomRight,
+                                child: Container(
+                                  margin: EdgeInsets.fromLTRB(0, 0, 20, 20),
+                                  child: Icon(
                                     Icons.camera_alt_rounded,
                                     size: 35,
                                   ),
@@ -232,6 +379,22 @@ class _ProfilePageState extends State<ProfilePage> {
                                     EasyLoading.showError('Kayıt Başarısız',
                                         duration: Duration(seconds: 2),
                                         dismissOnTap: true);
+                                  }
+                                  if (filePath != null) {
+                                    EasyLoading.show(
+                                        status: 'Resim Yükleniyor');
+                                    var IImResult =
+                                        await uploadImage(filePath!);
+                                    if (IImResult!['status'] == true) {
+                                      EasyLoading.showSuccess('Resim Yüklendi',
+                                          duration: Duration(seconds: 2),
+                                          dismissOnTap: true);
+                                    } else {
+                                      EasyLoading.showError(
+                                          'Kayıt Başarısız - ${IImResult['Error']}',
+                                          duration: Duration(seconds: 2),
+                                          dismissOnTap: true);
+                                    }
                                   }
                                 }
                               }),

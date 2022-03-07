@@ -40,7 +40,6 @@ Future<Map<String, dynamic>?> getBlogs(String? catId, String type) async {
           for (var item in resBody['Data']) {
             _blogController.blogs.add(item);
           }
-          _blogController.blogs.value.removeLast();
         }
         return {'status': true, 'Error': 'NoError'};
       } else {
